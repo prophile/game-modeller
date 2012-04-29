@@ -24,7 +24,7 @@ class Match(object):
 			t.start()
 
 		for r in self._robots:
-			r.addOpponents(self._robots)
+			r.add_opponents(self._robots)
 
 	def _print_state(self):
 		for r in self._robots:

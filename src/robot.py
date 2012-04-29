@@ -30,7 +30,7 @@ class Robot(object):
 	def location(self):
 		return self._location
 
-	def addOpponents(self, robots):
+	def add_opponents(self, robots):
 		for r in robots:
 			if not r is self:
 				self._opponents.add(r)
@@ -44,10 +44,10 @@ class Robot(object):
 #		print 'Game started: %d' % self._id
 
 		while not self._end:
-			target = self.getTarget()
-			self.moveTowards(target)
+			target = self.get_target()
+			self.move_towards(target)
 
-	def moveTowards(self, target):
+	def move_towards(self, target):
 		"""
 		Move towards the given Point for about a second
 		"""
@@ -63,7 +63,7 @@ class Robot(object):
 			time.sleep(self._updateDelay)
 			self._location = self._location + dist * self._updateDelay
 
-	def getTarget(self):
+	def get_target(self):
 		"""
 		Figure out where to move towards.
 		This is the interesting part of the robot's implementation
