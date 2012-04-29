@@ -1,15 +1,14 @@
-
 import json
 import sys
 import time
 from threading import Thread, Event
 
 from arena import Arena
-from robot import Robot
 from dict_converters import *
+from robot import Robot
+
 
 class Match(object):
-
 	def __init__(self, robots, arena = None):
 		# Game start lock
 		self._game_start = Event()
@@ -57,3 +56,4 @@ if __name__ == '__main__':
 	m = Match(1)
 	m.start(5)
 	m.end()
+
