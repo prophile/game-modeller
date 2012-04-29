@@ -8,37 +8,37 @@ from viewer.queueddatasource import QueuedDataSource
 from viewer.robotviewer import RobotViewer
 
 def read_process_output_non_blocking(proc):
-	while proc.poll() is None:
-		data = ''
-		while '\n' not in data and proc.poll() is None:
-			data += proc.stdout.read(1)
-		yield data
+    while proc.poll() is None:
+        data = ''
+        while '\n' not in data and proc.poll() is None:
+            data += proc.stdout.read(1)
+        yield data
 
 def decode_json_from_lines(lines):
-	for line in lines:
-		try:
-			yield json.loads(line)
-		except:
-			break
+    for line in lines:
+        try:
+            yield json.loads(line)
+        except:
+            break
 
 def main():
-	match_command = [ 'python', 'src/match.py' ]
-	match_process = subprocess.Popen(match_command,
-	                                 stdout = subprocess.PIPE)
+    match_command = [ 'python', 'src/match.py' ]
+    match_process = subprocess.Popen(match_command,
+                                     stdout = subprocess.PIPE)
 
-	def conv(p):
-		for d in decode_json_from_lines(read_process_output_non_blocking(p)):
-			yield d
+    def conv(p):
+        for d in decode_json_from_lines(read_process_output_non_blocking(p)):
+            yield d
 
-	data_source = QueuedDataSource(match_process, conv)
-	viewer = RobotViewer(data_source, duration = 5)
-	data_source.start()
+    data_source = QueuedDataSource(match_process, conv)
+    viewer = RobotViewer(data_source, duration = 5)
+    data_source.start()
 
-	pyglet.app.run()
+    pyglet.app.run()
 
-	if match_process.returncode is None:
-		match_process.terminate()
+    if match_process.returncode is None:
+        match_process.terminate()
 
 if __name__ == '__main__':
-	main()
+    main()
 
