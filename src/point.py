@@ -1,4 +1,3 @@
-
 class Vector(complex):
 	def __init__(self, x = 0, y = 0):
 		x = float(x)
@@ -127,3 +126,4 @@ class Point(Vector):
 
 	def __rmul__(self, other):
 		return NotImplemented
+
