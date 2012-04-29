@@ -37,7 +37,7 @@ class Match(object):
 		for r in self._robots:
 			r.stop()
 
-	def waitForStart(self):
+	def wait_for_start(self):
 		assert self._game_start.wait(3)
 
 	def start(self, duration = 180):
