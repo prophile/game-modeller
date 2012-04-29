@@ -12,6 +12,8 @@ class Arena(object):
 	height = property(attrgetter('_height'))
 
 	def corner_location(self, id):
-		x = self._width * int(id / 2)
-		y = self._height * ( id == 1 or id == 2 )
-		return Point(x, y)
+		return {0: Point(0, 0),
+		        1: Point(0, self.height),
+		        2: Point(self.width, self.height),
+		        3: Point(self.width, 0)}[id]
+
